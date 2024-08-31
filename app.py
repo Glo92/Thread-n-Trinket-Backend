@@ -4,7 +4,8 @@ from flask_restful import Api
 from flask_jwt_extended import JWTManager
 from models import db
 from Resources.user_resource import RegisterResource, LoginResource, LogoutResource
-from flask_mail import Mail,Message
+from flask_mail import Mail
+from Resources.password_reset import RequestPasswordResetResource, ResetPasswordResource
 
 app = Flask(__name__)
 
@@ -28,17 +29,14 @@ migrate = Migrate(app, db)
 jwt = JWTManager(app)
 api = Api(app)
 
-@app.route('/test-email')
-def test_email():
-    msg = Message('Test Email', recipients=['recipient@example.com'])
-    msg.body = 'This is a test email sent from Flask.'
-    mail.send(msg)
-    return 'Email sent!'
+
 
 
 api.add_resource(RegisterResource, '/register')
 api.add_resource(LoginResource, '/login')
 api.add_resource(LogoutResource, '/logout')
+api.add_resource(RequestPasswordResetResource, '/request-password-reset')
+api.add_resource(ResetPasswordResource, '/reset-password')
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)

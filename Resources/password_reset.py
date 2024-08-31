@@ -48,7 +48,7 @@ class ResetPasswordResource(Resource):
         new_password = args['new_password']
 
         try:
-            # Decode the token
+           
             payload = jwt.decode(reset_token, current_app.config['JWT_SECRET_KEY'], algorithms=['HS256'])
         except jwt.ExpiredSignatureError:
             return {'error': 'Reset token has expired'}, 400
@@ -61,7 +61,7 @@ class ResetPasswordResource(Resource):
         if user is None or user.reset_token != reset_token or user.reset_token_expiration < datetime.utcnow():
             return {'error': 'Invalid or expired reset token'}, 400
 
-        # Hash the new password
+        
         hashed_password = bcrypt.hashpw(new_password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
 
         user.password = hashed_password
