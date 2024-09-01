@@ -3,7 +3,7 @@ from sqlalchemy import MetaData
 from flask_login import UserMixin
 from datetime import datetime
 
-# Initialize SQLAlchemy
+
 metadata = MetaData()
 db = SQLAlchemy(metadata=metadata)
 

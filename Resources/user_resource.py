@@ -2,7 +2,7 @@ from flask_restful import Resource, reqparse
 import bcrypt
 from flask_mail import Message
 from flask import current_app, jsonify
-from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity
+from flask_jwt_extended import jwt_required, create_access_token
 from flask_jwt_extended import unset_jwt_cookies
 from models import db, User
 

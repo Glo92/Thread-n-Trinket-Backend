@@ -18,7 +18,7 @@ class RequestPasswordResetResource(Resource):
         if user is None:
             return {'error': 'Email not found'}, 404
 
-        # Generate a reset token
+        
         reset_token = jwt.encode(
             {'user_id': user.id, 'exp': datetime.utcnow() + timedelta(hours=1)},
             current_app.config['JWT_SECRET_KEY'],
@@ -29,7 +29,7 @@ class RequestPasswordResetResource(Resource):
         user.reset_token_expiration = datetime.utcnow() + timedelta(hours=1)
         db.session.commit()
 
-        # Send reset email
+    
         msg = Message('Password Reset Request', recipients=[email])
         msg.body = f'Your password reset token is: {reset_token}'
         current_app.extensions['mail'].send(msg)
