@@ -31,6 +31,7 @@ from Resources.password_reset import RequestPasswordResetResource, ResetPassword
 from Resources.products import ProductResource, ProductListResource, ProductUpdateResource, ProductDeleteResource, ProductDetailResource
 from Resources.category import CategoryResource, CategoryListResource, CategoryUpdateResource, CategoryDeleteResource
 from Resources.cart_resource import AddToCartResource, ViewCartResource, UpdateCartResource, RemoveFromCartResource
+from Resources.order_resource import OrderResource
 
 # Add resources to API
 api.add_resource(RegisterResource, '/register')
@@ -53,10 +54,11 @@ api.add_resource(CategoryDeleteResource, '/categories/<int:category_id>')
 
 api.add_resource(AddToCartResource, '/cart/add')
 api.add_resource(ViewCartResource, '/cart/view')
-# api.add_resource(ViewCartResource, '/cart/<int:user_id>')
 api.add_resource(UpdateCartResource, '/cart/update')
 api.add_resource(RemoveFromCartResource, '/cart/remove')
 
+
+api.add_resource(OrderResource, '/orders', '/orders/<int:order_id>')
 
 if __name__ == '__main__':
     app.run(debug=True)
